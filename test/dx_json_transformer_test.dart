@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:delimatrix_dart/dx_json_escape.dart';
 import 'package:delimatrix_dart/dx_json_transformer.dart';
 import 'package:delimatrix_dart/dx_result.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -128,5 +129,18 @@ void main() {
       expect(result, isA<DxSuccess<Map<String, String>>>());
       expect((result as DxSuccess<Map<String, String>>).value, {'foo': 'bar'});
     });
+  });
+
+  test('chains Map to Dx Json and back', () {
+    final transformer = JsonTransformers.fromMap
+        .chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian))
+        .chain(FromDxJsonTransformer(JsonEscapeConfigs.shavian))
+        .chain(JsonTransformers.toMap);
+
+    const DxResult<Map<String, String>> input = DxSuccess({'foo': 'bar'});
+    final DxResult<Map<String, String>> result = transformer.transform(input);
+
+    expect(result, isA<DxSuccess<Map<String, String>>>());
+    expect((result as DxSuccess<Map<String, String>>).value, {'foo': 'bar'});
   });
 }
