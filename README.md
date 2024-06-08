@@ -1,8 +1,34 @@
 # delimatrix_dart
 
-Delimatrix Dart transforms strings to objects and back with a touch of magic
+Delimatrix Dart transforms strings to objects and back with a touch of magic.
 
-![Delimatrix](docs/delimatrix.webp)
+![Delimatrix](doc/delimatrix.webp)
+
+## Example
+
+See `example/example.dart`
+
+```dart
+final fromMap = JsonTransformers.fromMap
+      .chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian));
+
+  final toMap = FromDxJsonTransformer(JsonEscapeConfigs.shavian)
+      .chain(JsonTransformers.toMap);
+
+  const DxResult<Map<String, String>> input = DxSuccess({'foo': 'bar'});
+
+  // Convert a Map<String, String> to Delimatrix style JSON
+  final jsonishStringResult = fromMap.transform(input);
+  print(jsonishStringResult.value);
+  // {𐑖foo𐑖:𐑖bar𐑖}
+
+  // Convert Delimatrix style JSON back to  Map<String, String>
+  final mapResult = toMap.transform(jsonishStringResult);
+  print(mapResult.value);
+  // {foo: bar}
+```
+
+## Motivation
 
 The Delimatrix library transforms strings into objects and back again with a touch of magic. This versatile tool excels when handling results, typically in JSON format, containing content that can be represented as multiple types of objects. Depending on the context, the content might be a string, an array of strings, or a more complex object.
 
