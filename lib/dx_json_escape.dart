@@ -211,7 +211,7 @@ class FromDxJsonTransformer extends DxTransformer<String, String> {
         .replaceAll(config.formFeed, '\f')
         .replaceAll(config.solidus, '/');
   }
-  
+
   @override
   DxResult<String> transform(DxResult<String> input) {
     return input.map(_transformString);

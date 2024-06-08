@@ -1,4 +1,5 @@
 library delimatrix_dart;
+
 import 'dx_result.dart';
 
 /// A transformer that takes a [DxResult] of type [T], and produces one of type [U].

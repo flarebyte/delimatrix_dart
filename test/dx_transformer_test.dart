@@ -38,8 +38,7 @@ void main() {
       final DxResult<String> result = transformer.transform(input);
 
       expect(result, isA<DxSuccess<String>>());
-      expect((result as DxSuccess<String>).value,
-          'Value: 9'); 
+      expect((result as DxSuccess<String>).value, 'Value: 9');
     });
 
     test('handles failure in chained transformers', () {

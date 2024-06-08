@@ -4,7 +4,7 @@ library delimatrix_dart;
 sealed class DxResult<T> {
   const DxResult();
 
-  /// A successful 
+  /// A successful
   bool get isSuccess => this is DxSuccess<T>;
 
   /// A failure
@@ -24,8 +24,9 @@ sealed class DxResult<T> {
     }
   }
 
- /// Returns a new [DxResult] by applying a validation function
-  DxResult<T> validate(bool Function(T value) validator, String errorId, String errorMessage) {
+  /// Returns a new [DxResult] by applying a validation function
+  DxResult<T> validate(
+      bool Function(T value) validator, String errorId, String errorMessage) {
     if (this is DxSuccess<T>) {
       if (validator((this as DxSuccess<T>).value)) {
         return this;
@@ -39,7 +40,7 @@ sealed class DxResult<T> {
 }
 
 /// A successful result that contains a value of type [T].
-final class DxSuccess<T> extends DxResult<T> { 
+final class DxSuccess<T> extends DxResult<T> {
   @override
   final T value;
 
