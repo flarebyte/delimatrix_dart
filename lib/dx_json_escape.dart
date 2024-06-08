@@ -123,7 +123,24 @@ class ToDxJsonTransformer {
 
   /// Transforms the input [input] string by escaping characters
   /// according to the [config].
-  String transformString(String input) {
+  String escapeString(String input) {
+    return _transformString(input);
+  }
+
+  /// Private method Checks if any of the replacement characters in the [config] are present in the [input] string.
+  bool _hasAnyTargetChar(String input) {
+    return input.contains(config.doubleQuote) ||
+        input.contains(config.backslash) ||
+        input.contains(config.lineFeed) ||
+        input.contains(config.carriageReturn) ||
+        input.contains(config.horizontalTab) ||
+        input.contains(config.backspace) ||
+        input.contains(config.formFeed) ||
+        input.contains(config.solidus);
+  }
+
+  /// Private method to transform the input string by escaping characters.
+  String _transformString(String input) {
     return input
         .replaceAll('"', config.doubleQuote)
         .replaceAll('\\', config.backslash)
@@ -135,7 +152,6 @@ class ToDxJsonTransformer {
         .replaceAll('/', config.solidus);
   }
 }
-
 /// A class that transforms a JSON string by unescaping specific characters
 /// based on the provided [JsonEscapeConfig].
 class FromDxJsonTransformer {
@@ -146,7 +162,12 @@ class FromDxJsonTransformer {
 
   /// Transforms the input [input] string by unescaping characters
   /// according to the [config].
-  String transformString(String input) {
+  String unescapeString(String input) {
+    return _transformString(input);
+  }
+
+  /// Private method to transform the input string by unescaping characters.
+  String _transformString(String input) {
     return input
         .replaceAll(config.doubleQuote, '"')
         .replaceAll(config.backslash, '\\')
@@ -158,4 +179,3 @@ class FromDxJsonTransformer {
         .replaceAll(config.solidus, '/');
   }
 }
-
