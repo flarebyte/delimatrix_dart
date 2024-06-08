@@ -24,3 +24,23 @@ class JsonToListTransformer extends DxTransformer<String, List<String>> {
     }
   }
 }
+
+// Transformer to convert Map<String, String> to JSON String
+class MapToJsonTransformer extends DxTransformer<Map<String, String>, String> {
+  @override
+  DxResult<String> transform(DxResult<Map<String, String>> input) {
+    return input.map((value) => jsonEncode(value));
+  }
+}
+
+// Transformer to convert JSON String to Map<String, String>
+class JsonToMapTransformer extends DxTransformer<String, Map<String, String>> {
+  @override
+  DxResult<Map<String, String>> transform(DxResult<String> input) {
+    try {
+      return input.map((value) => Map<String, String>.from(jsonDecode(value)));
+    } catch (e) {
+      return const DxFailure('delimatrix:1e7a6573', 'Invalid JSON format');
+    }
+  }
+}
