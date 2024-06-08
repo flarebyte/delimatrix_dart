@@ -1,3 +1,4 @@
+/// Delimatrix transforms strings to objects and back with a touch of magic.
 library;
 
 export 'src/dx_json_escape.dart'
