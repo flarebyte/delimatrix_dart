@@ -1,3 +1,4 @@
+library delimatrix_dart;
 import 'dx_result.dart';
 
 abstract class DxTransformer<T, U> {

@@ -1,3 +1,5 @@
+library delimatrix_dart;
+
 /// Immutable configuration class for JSON escape characters.
 class JsonEscapeConfig {
   /// Character for escaping double quotes (`"`).
