@@ -23,6 +23,19 @@ sealed class DxResult<T> {
       return DxFailure(failure.id, failure.message);
     }
   }
+
+ /// Returns a new [DxResult] by applying a validation function
+  DxResult<T> validate(bool Function(T value) validator, String errorId, String errorMessage) {
+    if (this is DxSuccess<T>) {
+      if (validator((this as DxSuccess<T>).value)) {
+        return this;
+      } else {
+        return DxFailure(errorId, errorMessage);
+      }
+    } else {
+      return this;
+    }
+  }
 }
 
 /// A successful result that contains a value of type [T].
