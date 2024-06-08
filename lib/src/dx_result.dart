@@ -1,5 +1,3 @@
-library delimatrix_dart;
-
 /// Result that can either be a success or failure.
 sealed class DxResult<T> {
   const DxResult();

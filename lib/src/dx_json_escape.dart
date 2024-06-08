@@ -1,7 +1,5 @@
-library delimatrix_dart;
-
-import 'package:delimatrix_dart/dx_result.dart';
-import 'package:delimatrix_dart/dx_transformer.dart';
+import 'dx_result.dart';
+import 'dx_transformer.dart';
 
 /// Immutable configuration class for JSON escape characters.
 class JsonEscapeConfig {
@@ -106,7 +104,7 @@ class JsonEscapeConfigBuilder {
   /// Builds and returns an instance of [JsonEscapeConfig] with the set or default values.
   JsonEscapeConfig build() {
     return JsonEscapeConfig._(
-      doubleQuote: _doubleQuote ?? '\"',
+      doubleQuote: _doubleQuote ?? '"',
       backslash: _backslash ?? '\\',
       lineFeed: _lineFeed ?? '\n',
       carriageReturn: _carriageReturn ?? '\r',

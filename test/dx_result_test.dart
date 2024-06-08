@@ -1,6 +1,5 @@
+import 'package:delimatrix_dart/delimatrix.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:delimatrix_dart/dx_result.dart';
 
 void main() {
   group('DxResult.map', () {

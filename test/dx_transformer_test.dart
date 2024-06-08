@@ -1,5 +1,4 @@
-import 'package:delimatrix_dart/dx_result.dart';
-import 'package:delimatrix_dart/dx_transformer.dart';
+import 'package:delimatrix_dart/delimatrix.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class IntToStringTransformer extends DxTransformer<int, String> {

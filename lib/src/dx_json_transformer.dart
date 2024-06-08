@@ -1,5 +1,3 @@
-library delimatrix_dart;
-
 import 'dart:convert';
 
 import 'dx_result.dart';

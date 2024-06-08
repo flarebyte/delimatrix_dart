@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:delimatrix_dart/dx_json_escape.dart';
-import 'package:delimatrix_dart/dx_json_transformer.dart';
-import 'package:delimatrix_dart/dx_result.dart';
+import 'package:delimatrix_dart/delimatrix.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
