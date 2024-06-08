@@ -1,8 +1,17 @@
 # delimatrix_dart
 
-Delimatrix Dart transforms strings to objects and back with a touch of magic.
+> Delimatrix Dart transforms strings to objects and back with a touch of magic.
 
-![Delimatrix](doc/delimatrix.webp)
+This versatile tool excels when handling results, typically in JSON format, containing content that can be represented as multiple types of objects. Depending on the context, the content might be a string, an array of strings, or a more complex object.
+
+![Delimatrix](doc/delimatrix.jpeg)
+
+Highlights:
+
+- Uses transformers to convert between different types of objects.
+- Unopinionated JSON serialization support.
+- Provides a chainable API for transforming between different formats.
+- Validates input before transformation.
 
 ## Example
 
@@ -29,8 +38,6 @@ final fromMap = JsonTransformers.fromMap
 ```
 
 ## Motivation
-
-The Delimatrix library transforms strings into objects and back again with a touch of magic. This versatile tool excels when handling results, typically in JSON format, containing content that can be represented as multiple types of objects. Depending on the context, the content might be a string, an array of strings, or a more complex object.
 
 Traditionally, dealing with such cases involves parsing the JSON result in a single pass, expanding the content field into an object if necessary, and allowing the code to manage any type changes. Delimatrix, however, employs a different approach by assuming two parsing phases.
 
