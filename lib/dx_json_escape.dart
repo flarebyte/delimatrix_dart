@@ -113,6 +113,37 @@ class JsonEscapeConfigBuilder {
   }
 }
 
+/// JSON Escape configuration using rarely used caharacters
+class JsonEscapeConfigs {
+  static final JsonEscapeConfig shavianConfig = JsonEscapeConfig.builder()
+      .setDoubleQuote('𐑖') // Shavian letter "Ea"
+      .setBackslash('𐑕') // Shavian letter "Sha"
+      .setLineFeed('𐑑') // Shavian letter "Pa"
+      .setCarriageReturn('𐑟') // Shavian letter "Tha"
+      .setHorizontalTab('𐑚') // Shavian letter "Ra"
+      .setBackspace('𐑔') // Shavian letter "Ka"
+      .setFormFeed('𐑓') // Shavian letter "Fa"
+      .setSolidus('𐑗') // Shavian letter "Sa"
+      .build();
+
+  static final JsonEscapeConfig linearBConfig = JsonEscapeConfig.builder()
+      .setDoubleQuote('𐀀') // Linear B Syllable B008 A
+      .setBackslash('𐀁') // Linear B Syllable B038 E
+      .setLineFeed('𐀂') // Linear B Syllable B028 I
+      .setCarriageReturn('𐀃') // Linear B Syllable B061 O
+      .setHorizontalTab('𐀄') // Linear B Syllable B010 U
+      .setBackspace('𐀅') // Linear B Syllable B001 DA
+      .setFormFeed('𐀆') // Linear B Syllable B045 DE
+      .setSolidus('𐀇') // Linear B Syllable B007 DI
+      .build();
+
+  /// The Shavian alphabet, designed by Kingsley Read and named after George Bernard Shaw, is a phonemic orthography intended to simplify English spelling.
+  static JsonEscapeConfig get shavian => shavianConfig;
+
+  /// An ancient script used for writing Mycenaean Greek
+  static JsonEscapeConfig get linearB => linearBConfig;
+}
+
 /// A class that transforms a JSON string by escaping specific characters
 /// based on the provided [JsonEscapeConfig].
 class ToDxJsonTransformer {
@@ -152,6 +183,7 @@ class ToDxJsonTransformer {
         .replaceAll('/', config.solidus);
   }
 }
+
 /// A class that transforms a JSON string by unescaping specific characters
 /// based on the provided [JsonEscapeConfig].
 class FromDxJsonTransformer {

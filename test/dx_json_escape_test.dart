@@ -55,5 +55,72 @@ void main() {
       expect(config.solidus, equals('/'));
     });
   });
+group('ToDxJsonTransformer and FromDxJsonTransformer Tests', () {
+    test('Shavian Transformation with JSON payload', () {
+      String input = '{"key": "value with special chars: \\" \\n \\r \\t \\b \\f /"}';
+      ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.shavian);
+      FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.shavian);
+
+      String transformed = toTransformer.escapeString(input);
+      String reverted = fromTransformer.unescapeString(transformed);
+
+      expect(reverted, equals(input));
+    });
+
+    test('Shavian Transformation with CSV payload', () {
+      String input = 'key1, key2, "value with, comma", "value with \\"quotes\\""';
+      ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.shavian);
+      FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.shavian);
+
+      String transformed = toTransformer.escapeString(input);
+      String reverted = fromTransformer.unescapeString(transformed);
+
+      expect(reverted, equals(input));
+    });
+
+    test('Shavian Transformation with String payload', () {
+      String input = 'This is a simple string with special chars: \\" \\n \\r \\t \\b \\f /';
+      ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.shavian);
+      FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.shavian);
+
+      String transformed = toTransformer.escapeString(input);
+      String reverted = fromTransformer.unescapeString(transformed);
+
+      expect(reverted, equals(input));
+    });
+
+    test('Linear B Transformation with JSON payload', () {
+      String input = '{"key": "value with special chars: \\" \\n \\r \\t \\b \\f /"}';
+      ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.linearB);
+      FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.linearB);
+
+      String transformed = toTransformer.escapeString(input);
+      String reverted = fromTransformer.unescapeString(transformed);
+
+      expect(reverted, equals(input));
+    });
+
+    test('Linear B Transformation with CSV payload', () {
+      String input = 'key1, key2, "value with, comma", "value with \\"quotes\\""';
+      ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.linearB);
+      FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.linearB);
+
+      String transformed = toTransformer.escapeString(input);
+      String reverted = fromTransformer.unescapeString(transformed);
+
+      expect(reverted, equals(input));
+    });
+
+    test('Linear B Transformation with String payload', () {
+      String input = 'This is a simple string with special chars: \\" \\n \\r \\t \\b \\f /';
+      ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.linearB);
+      FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.linearB);
+
+      String transformed = toTransformer.escapeString(input);
+      String reverted = fromTransformer.unescapeString(transformed);
+
+      expect(reverted, equals(input));
+    });
+  });
 }
 
