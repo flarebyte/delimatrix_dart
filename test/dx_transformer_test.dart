@@ -22,11 +22,11 @@ void main() {
       final transformer =
           IntToStringTransformer().chain(StringToLengthTransformer());
 
-      final DxResult<int> input = DxSuccess(42);
+      const DxResult<int> input = DxSuccess(42);
       final DxResult<int> result = transformer.transform(input);
 
       expect(result, isA<DxSuccess<int>>());
-      expect((result as DxSuccess<int>).value, 9); // 'Value: 42' length is 9
+      expect((result as DxSuccess<int>).value, 'Value: 42'.length);
     });
 
     test('chains three transformers correctly', () {
@@ -34,19 +34,19 @@ void main() {
           .chain(StringToLengthTransformer())
           .chain(IntToStringTransformer());
 
-      final DxResult<int> input = DxSuccess(42);
+      const DxResult<int> input = DxSuccess(42);
       final DxResult<String> result = transformer.transform(input);
 
       expect(result, isA<DxSuccess<String>>());
       expect((result as DxSuccess<String>).value,
-          'Value: 9'); // Length of 'Value: 42' is 9, then 'Value: 9'
+          'Value: 9'); 
     });
 
     test('handles failure in chained transformers', () {
       final transformer =
           IntToStringTransformer().chain(StringToLengthTransformer());
 
-      final DxResult<int> input = DxFailure('404', 'Not Found');
+      const DxResult<int> input = DxFailure('404', 'Not Found');
       final DxResult<int> result = transformer.transform(input);
 
       expect(result, isA<DxFailure>());
