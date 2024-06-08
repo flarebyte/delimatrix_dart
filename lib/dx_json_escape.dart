@@ -113,3 +113,49 @@ class JsonEscapeConfigBuilder {
   }
 }
 
+/// A class that transforms a JSON string by escaping specific characters
+/// based on the provided [JsonEscapeConfig].
+class ToDxJsonTransformer {
+  final JsonEscapeConfig config;
+
+  /// Creates an instance of [ToDxJsonTransformer] with the given [config].
+  ToDxJsonTransformer(this.config);
+
+  /// Transforms the input [input] string by escaping characters
+  /// according to the [config].
+  String transformString(String input) {
+    return input
+        .replaceAll('"', config.doubleQuote)
+        .replaceAll('\\', config.backslash)
+        .replaceAll('\n', config.lineFeed)
+        .replaceAll('\r', config.carriageReturn)
+        .replaceAll('\t', config.horizontalTab)
+        .replaceAll('\b', config.backspace)
+        .replaceAll('\f', config.formFeed)
+        .replaceAll('/', config.solidus);
+  }
+}
+
+/// A class that transforms a JSON string by unescaping specific characters
+/// based on the provided [JsonEscapeConfig].
+class FromDxJsonTransformer {
+  final JsonEscapeConfig config;
+
+  /// Creates an instance of [FromDxJsonTransformer] with the given [config].
+  FromDxJsonTransformer(this.config);
+
+  /// Transforms the input [input] string by unescaping characters
+  /// according to the [config].
+  String transformString(String input) {
+    return input
+        .replaceAll(config.doubleQuote, '"')
+        .replaceAll(config.backslash, '\\')
+        .replaceAll(config.lineFeed, '\n')
+        .replaceAll(config.carriageReturn, '\r')
+        .replaceAll(config.horizontalTab, '\t')
+        .replaceAll(config.backspace, '\b')
+        .replaceAll(config.formFeed, '\f')
+        .replaceAll(config.solidus, '/');
+  }
+}
+
