@@ -1,5 +1,8 @@
 library delimatrix_dart;
 
+import 'package:delimatrix_dart/dx_result.dart';
+import 'package:delimatrix_dart/dx_transformer.dart';
+
 /// Immutable configuration class for JSON escape characters.
 class JsonEscapeConfig {
   /// Character for escaping double quotes (`"`).
@@ -148,28 +151,22 @@ class JsonEscapeConfigs {
 
 /// A class that transforms a JSON string by escaping specific characters
 /// based on the provided [JsonEscapeConfig].
-class ToDxJsonTransformer {
+class ToDxJsonTransformer extends DxTransformer<String, String> {
   final JsonEscapeConfig config;
 
   /// Creates an instance of [ToDxJsonTransformer] with the given [config].
   ToDxJsonTransformer(this.config);
 
-  /// Transforms the input [input] string by escaping characters
-  /// according to the [config].
-  String escapeString(String input) {
-    return _transformString(input);
-  }
-
   /// Private method Checks if any of the replacement characters in the [config] are present in the [input] string.
-  bool _hasAnyTargetChar(String input) {
-    return input.contains(config.doubleQuote) ||
+  bool _hasNotAnyTargetChar(String input) {
+    return !(input.contains(config.doubleQuote) ||
         input.contains(config.backslash) ||
         input.contains(config.lineFeed) ||
         input.contains(config.carriageReturn) ||
         input.contains(config.horizontalTab) ||
         input.contains(config.backspace) ||
         input.contains(config.formFeed) ||
-        input.contains(config.solidus);
+        input.contains(config.solidus));
   }
 
   /// Private method to transform the input string by escaping characters.
@@ -184,21 +181,23 @@ class ToDxJsonTransformer {
         .replaceAll('\f', config.formFeed)
         .replaceAll('/', config.solidus);
   }
+
+  @override
+  DxResult<String> transform(DxResult<String> input) {
+    return input
+        .validate(_hasNotAnyTargetChar, 'delimatrix:199fdd19',
+            'Special chars already in payload')
+        .map(_transformString);
+  }
 }
 
 /// A class that transforms a JSON string by unescaping specific characters
 /// based on the provided [JsonEscapeConfig].
-class FromDxJsonTransformer {
+class FromDxJsonTransformer extends DxTransformer<String, String> {
   final JsonEscapeConfig config;
 
   /// Creates an instance of [FromDxJsonTransformer] with the given [config].
   FromDxJsonTransformer(this.config);
-
-  /// Transforms the input [input] string by unescaping characters
-  /// according to the [config].
-  String unescapeString(String input) {
-    return _transformString(input);
-  }
 
   /// Private method to transform the input string by unescaping characters.
   String _transformString(String input) {
@@ -211,5 +210,10 @@ class FromDxJsonTransformer {
         .replaceAll(config.backspace, '\b')
         .replaceAll(config.formFeed, '\f')
         .replaceAll(config.solidus, '/');
+  }
+  
+  @override
+  DxResult<String> transform(DxResult<String> input) {
+    return input.map(_transformString);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:delimatrix_dart/dx_json_escape.dart';
+import 'package:delimatrix_dart/dx_result.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 
@@ -57,69 +58,68 @@ void main() {
   });
 group('ToDxJsonTransformer and FromDxJsonTransformer Tests', () {
     test('Shavian Transformation with JSON payload', () {
-      String input = '{"key": "value with special chars: \\" \\n \\r \\t \\b \\f /"}';
+      const DxResult<String> input = DxSuccess('{"key": "value with special chars: \\" \\n \\r \\t \\b \\f /"}');
       ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.shavian);
       FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.shavian);
 
-      String transformed = toTransformer.escapeString(input);
-      String reverted = fromTransformer.unescapeString(transformed);
-
-      expect(reverted, equals(input));
+      DxResult<String> transformed = toTransformer.transform(input);
+      DxResult<String> reverted = fromTransformer.transform(transformed);
+      expect(reverted.value, equals(input.value));
     });
 
     test('Shavian Transformation with CSV payload', () {
-      String input = 'key1, key2, "value with, comma", "value with \\"quotes\\""';
+      const DxResult<String> input =DxSuccess( 'key1, key2, "value with, comma", "value with \\"quotes\\""');
       ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.shavian);
       FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.shavian);
 
-      String transformed = toTransformer.escapeString(input);
-      String reverted = fromTransformer.unescapeString(transformed);
+      DxResult<String> transformed = toTransformer.transform(input);
+      DxResult<String> reverted = fromTransformer.transform(transformed);
 
-      expect(reverted, equals(input));
+      expect(reverted.value, equals(input.value));
     });
 
     test('Shavian Transformation with String payload', () {
-      String input = 'This is a simple string with special chars: \\" \\n \\r \\t \\b \\f /';
+      const DxResult<String> input = DxSuccess('This is a simple string with special chars: \\" \\n \\r \\t \\b \\f /');
       ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.shavian);
       FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.shavian);
 
-      String transformed = toTransformer.escapeString(input);
-      String reverted = fromTransformer.unescapeString(transformed);
+      DxResult<String> transformed = toTransformer.transform(input);
+      DxResult<String> reverted = fromTransformer.transform(transformed);
 
-      expect(reverted, equals(input));
+      expect(reverted.value, equals(input.value));
     });
 
     test('Linear B Transformation with JSON payload', () {
-      String input = '{"key": "value with special chars: \\" \\n \\r \\t \\b \\f /"}';
+      const DxResult<String> input = DxSuccess('{"key": "value with special chars: \\" \\n \\r \\t \\b \\f /"}');
       ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.linearB);
       FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.linearB);
 
-      String transformed = toTransformer.escapeString(input);
-      String reverted = fromTransformer.unescapeString(transformed);
+      DxResult<String> transformed = toTransformer.transform(input);
+      DxResult<String> reverted = fromTransformer.transform(transformed);
 
-      expect(reverted, equals(input));
+      expect(reverted.value, equals(input.value));
     });
 
     test('Linear B Transformation with CSV payload', () {
-      String input = 'key1, key2, "value with, comma", "value with \\"quotes\\""';
+      const DxResult<String> input = DxSuccess('key1, key2, "value with, comma", "value with \\"quotes\\""');
       ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.linearB);
       FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.linearB);
 
-      String transformed = toTransformer.escapeString(input);
-      String reverted = fromTransformer.unescapeString(transformed);
+      DxResult<String> transformed = toTransformer.transform(input);
+      DxResult<String> reverted = fromTransformer.transform(transformed);
 
-      expect(reverted, equals(input));
+      expect(reverted.value, equals(input.value));
     });
 
     test('Linear B Transformation with String payload', () {
-      String input = 'This is a simple string with special chars: \\" \\n \\r \\t \\b \\f /';
+      const DxResult<String> input = DxSuccess('This is a simple string with special chars: \\" \\n \\r \\t \\b \\f /');
       ToDxJsonTransformer toTransformer = ToDxJsonTransformer(JsonEscapeConfigs.linearB);
       FromDxJsonTransformer fromTransformer = FromDxJsonTransformer(JsonEscapeConfigs.linearB);
 
-      String transformed = toTransformer.escapeString(input);
-      String reverted = fromTransformer.unescapeString(transformed);
+      DxResult<String> transformed = toTransformer.transform(input);
+      DxResult<String> reverted = fromTransformer.transform(transformed);
 
-      expect(reverted, equals(input));
+      expect(reverted.value, equals(input.value));
     });
   });
 }
