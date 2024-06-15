@@ -6,7 +6,7 @@ void main() {
     test('should build JsonEscapeConfig with default values', () {
       final config = JsonEscapeConfig.builder().build();
 
-      expect(config.doubleQuote, equals('\"'));
+      expect(config.doubleQuote, equals('"'));
       expect(config.backslash, equals('\\'));
       expect(config.lineFeed, equals('\n'));
       expect(config.carriageReturn, equals('\r'));
