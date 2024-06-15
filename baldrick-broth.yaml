@@ -1,7 +1,10 @@
 model:
   project:
     title: Delimatrix transforms strings to objects and back with a touch of magic
-    description: This versatile tool excels when handling results, typically in JSON format, containing content that can be represented as multiple types of objects. Depending on the context, the content might be a string, an array of strings, or a more complex object
+    description: This versatile tool excels when handling results, typically in JSON
+      format, containing content that can be represented as multiple types of
+      objects. Depending on the context, the content might be a string, an array
+      of strings, or a more complex object
     version: 0.4.0
     keywords:
       - json
@@ -21,9 +24,9 @@ model:
       - image-hero
     cheatsheet:
       - title: Transform a Map of string to a Shavian style JSON
-        example: "JsonTransformers.fromMap.chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian)).transform(input);"
+        example: JsonTransformers.fromMap.chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian)).transform(input);
       - title: Transform Shavian style JSON to a Map of string
-        example: "FromDxJsonTransformer(JsonEscapeConfigs.shavian).chain(JsonTransformers.toMap).transform(jsonishStringResult);"
+        example: FromDxJsonTransformer(JsonEscapeConfigs.shavian).chain(JsonTransformers.toMap).transform(jsonishStringResult);
   github:
     account: flarebyte
     name: delimatrix_dart
@@ -70,14 +73,14 @@ workflows:
     title: Generate the documentation
     description: Generate the documentation automatically
     tasks:
-      ts:
+      api:
         title: Generate documentation
-        description: Generate the markdown documentation for the typescript project
+        description: Generate the api documentation for Dart
         motivation: Good documentation is essential for developer experience
         main:
           commands:
-              - title: Gnerate API documentation
-                run: dart doc
+            - title: Gnerate API documentation
+              run: dart doc
   github:
     title: Management of the github project
     description: Generate the documentation based on the source code
@@ -105,7 +108,7 @@ workflows:
               title: Lint check sources
               run: dart analyze
             - name: check fix
-              title:  Preview of the proposed changes for a project
+              title: Preview of the proposed changes for a project
               run: dart fix --dry-run
       fix:
         title: Fix static code analysis
@@ -134,8 +137,7 @@ workflows:
               run: npx baldrick-dev-ts@latest markdown check -s .github/
       fix:
         title: Fix Markdown files
-        description:
-          Modify the markdown documents to ensure they follow some consistent
+        description: Modify the markdown documents to ensure they follow some consistent
           guidelines
         motivation: Make the markdown documents consistent in style
         main:
@@ -149,8 +151,7 @@ workflows:
     tasks:
       ready:
         title: Ready for publishing
-        description:
-          Run a sequence of commands to check that the library is ready to be
+        description: Run a sequence of commands to check that the library is ready to be
           published
         motivation: Detect quality flaws before pushing the code
         parameters:
@@ -195,7 +196,6 @@ workflows:
                 {{#if _.result-of-markdown}}- :heavy_check_mark:{{else}}- :heavy_exclamation_mark:{{/if}} Markdown formatting
 
                 {{#if _.result-of-outdated}}- :heavy_check_mark:{{else}}- :heavy_exclamation_mark:{{/if}} No outdated NPM libraries
-
             - name: write-report
               a: append-to-file
               title: Write the report
@@ -223,8 +223,7 @@ workflows:
               title: Title for the pull request
               description: A short title used for the pull request
               message: Short title describing the pull request
-            - run:
-                gh pr create --title {{escapeSpace _.category}}:{{escapeSpace _.title}}
+            - run: gh pr create --title {{escapeSpace _.category}}:{{escapeSpace _.title}}
                 --body-file temp/pull_request_relevant.md
               title: Create the pull request
       publish:
@@ -286,16 +285,14 @@ workflows:
                 github:flarebyte:baldrick-reserve:data/dart/baldrick-broth.yaml
       norm:
         title: Normalize the project
-        description: Normalize the project in a similar fashion that the other
-          dart projects
+        description: Normalize the project in a similar fashion that the other dart projects
         motivation: Make the project structure consistent and easier to navigate
         main:
           commands:
             - title: Create all github repositories
               run: mkdir -p .github/workflows .github/ISSUE_TEMPLATE
             - title: Github - create bug report form
-              run:
-                npx baldrick-whisker@latest object .github/ISSUE_TEMPLATE/bug_report.yaml
+              run: npx baldrick-whisker@latest object .github/ISSUE_TEMPLATE/bug_report.yaml
                 github:flarebyte:baldrick-reserve:data/dart/bug-report.yaml
             - title: Github - create feature request form
               run: npx baldrick-whisker@latest object
@@ -314,13 +311,11 @@ workflows:
               links:
                 - title: Specify files to ignore in source control
                   url: https://git-scm.com/docs/gitignore
-              run:
-                npx baldrick-whisker@latest render --no-ext baldrick-broth.yaml
+              run: npx baldrick-whisker@latest render --no-ext baldrick-broth.yaml
                 github:flarebyte:baldrick-reserve:template/dart/gitignore.hbs
                 .gitignore.sh
             - title: Create .editorconfig
-              run:
-                npx baldrick-whisker@latest render --no-ext baldrick-broth.yaml
+              run: npx baldrick-whisker@latest render --no-ext baldrick-broth.yaml
                 github:flarebyte:baldrick-reserve:template/editorconfig.hbs
                 .editorconfig.sh
               links:
@@ -358,8 +353,7 @@ workflows:
                 github:flarebyte:baldrick-reserve:template/dart/maintenance.hbs
                 MAINTENANCE.md
             - title: Create LICENSE
-              run:
-                npx baldrick-whisker@latest render --no-ext baldrick-broth.yaml
+              run: npx baldrick-whisker@latest render --no-ext baldrick-broth.yaml
                 github:flarebyte:baldrick-reserve:template/dart/license.hbs
                 LICENSE.md
             - title: Fix markdown
@@ -389,8 +383,7 @@ workflows:
                 temp/broth/package-specific.yaml temp/broth/package-deps.yaml
       norm-package:
         title: Normalize the project
-        description: Normalize the project in a similar fashion that the other
-          dart projects
+        description: Normalize the project in a similar fashion that the other dart projects
         motivation: Make the project structure consistent and easier to navigate
         main:
           commands:
@@ -421,8 +414,7 @@ workflows:
       custom:
         title: Normalize using the custom script
         description: Normalize the project using a custom script for this project
-        motivation:
-          Enable an imperative approach for some of normalisation to keep the
+        motivation: Enable an imperative approach for some of normalisation to keep the
           model simple
         main:
           commands:
