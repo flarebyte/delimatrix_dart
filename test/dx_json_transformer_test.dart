@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:delimatrix_dart/delimatrix_dart.dart';
+import 'package:delimatrix_dart/delimatrix.dart';
 import 'package:test/test.dart';
 
 void main() {
