@@ -55,6 +55,10 @@ workflows:
             url: https://pub.dev/packages/test
         main:
           commands:
+            - title: Format nicely the lib source code
+              run:  dart format lib
+            - title:  Format nicely the test source code
+              run:  dart format test
             - title: Run unit tests
               run: dart test
   deps:
