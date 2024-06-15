@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:delimatrix_dart/delimatrix_dart.dart';
 import 'package:test/test.dart';
-import 'package:delimatrix/delimatrix.dart';
 
 void main() {
   group('ListToJsonTransformer', () {

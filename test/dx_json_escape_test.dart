@@ -1,4 +1,4 @@
-import 'package:delimatrix/delimatrix.dart';
+import 'package:delimatrix_dart/delimatrix_dart.dart';
 import 'package:test/test.dart';
 
 void main() {

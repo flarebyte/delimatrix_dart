@@ -1,4 +1,4 @@
-name: delimatrix
+name: delimatrix_dart
 description: Delimatrix transforms strings to objects and back with a touch of magic.
 version: 0.1.0
 homepage: https://github.com/flarebyte/delimatrix_dart

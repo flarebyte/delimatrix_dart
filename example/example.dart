@@ -1,4 +1,4 @@
-import 'package:delimatrix/delimatrix.dart';
+import 'package:delimatrix_dart/delimatrix_dart.dart';
 
 void main() {
   final fromMap = JsonTransformers.fromMap
