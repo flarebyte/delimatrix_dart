@@ -278,10 +278,10 @@ workflows:
               a: write-to-file
               title: Save baldrick-broth file with existing model
               value: data.broth-model
-              filename: temp/broth/baldrick-broth-model.json
+              filename: temp/broth/baldrick-broth-model.yaml
             - title: merge model with new workflow
               run: npx baldrick-whisker@latest object baldrick-broth.yaml
-                temp/broth/baldrick-broth-model.json
+                temp/broth/baldrick-broth-model.yaml
                 github:flarebyte:baldrick-reserve:data/dart/baldrick-broth.yaml
       norm:
         title: Normalize the project
@@ -358,18 +358,24 @@ workflows:
                 LICENSE.md
             - title: Fix markdown
               run: npx baldrick-broth@latest md fix
+      norm-package:
+        title: Normalize the project
+        description: Normalize the project in a similar fashion that the other dart projects
+        motivation: Make the project structure consistent and easier to navigate
+        main:
+          commands:
             - name: package-yaml
               title: Backup dependencies
               run: cat pubspec.yaml
               onSuccess:
                 - save
                 - silent
-                - json
+                - yaml
             - a: mask-object
               title: Extracts dependencies from pubspec.yaml
-              name: package-json-deps
+              name: package-yaml-deps
               value: data.package-yaml
-              mask: dependencies,dev_dependencies,environment
+              mask: environment,dependencies,dev_dependencies
             - name: save-package-yaml-deps
               title: Save pubspec.yaml with only dependencies
               stdin: data.package-yaml-deps
@@ -381,36 +387,6 @@ workflows:
             - title: merge dependencies with broth model info
               run: npx baldrick-whisker@latest object pubspec.yaml
                 temp/broth/package-specific.yaml temp/broth/package-deps.yaml
-      norm-package:
-        title: Normalize the project
-        description: Normalize the project in a similar fashion that the other dart projects
-        motivation: Make the project structure consistent and easier to navigate
-        main:
-          commands:
-            - name: package-json
-              title: Backup dependencies
-              run: cat package.json
-              onSuccess:
-                - save
-                - silent
-                - json
-            - a: mask-object
-              title: Extracts dependencies from package.json
-              name: package-json-deps
-              value: data.package-json
-              mask: dependencies,devDependencies,peerDependencies
-            - a: write-to-file
-              title: Save package.json with only dependencies
-              name: save-package-json-deps
-              value: data.package-json-deps
-              filename: temp/broth/package-deps.json
-            - title: Create package.json metadata from broth model
-              run: npx baldrick-whisker@latest render baldrick-broth.yaml
-                github:flarebyte:baldrick-reserve:template/ts/package.hbs
-                temp/broth/package-specific.json
-            - title: merge dependencies with broth model info
-              run: npx baldrick-whisker@latest object package.json
-                temp/broth/package-specific.json temp/broth/package-deps.json
       custom:
         title: Normalize using the custom script
         description: Normalize the project using a custom script for this project
