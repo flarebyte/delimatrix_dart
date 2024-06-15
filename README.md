@@ -1,50 +1,54 @@
-# delimatrix_dart
+# delimatrix\_dart
 
-> Delimatrix Dart transforms strings to objects and back with a touch of magic.
+![Experimental](https://img.shields.io/badge/status-experimental-blue)
 
-This versatile tool excels when handling results, typically in JSON format, containing content that can be represented as multiple types of objects. Depending on the context, the content might be a string, an array of strings, or a more complex object.
+> Delimatrix transforms strings to objects and back with a touch of magic
 
-![Delimatrix](doc/delimatrix.jpeg)
+This versatile tool excels when handling results, typically in JSON format,
+containing content that can be represented as multiple types of objects.
+Depending on the context, the content might be a string, an array of strings,
+or a more complex object
+
+![Hero image for delimatrix\_dart](doc/delimatrix_dart.jpeg)
 
 Highlights:
 
-- Uses transformers to convert between different types of objects.
-- Unopinionated JSON serialization support.
-- Provides a chainable API for transforming between different formats.
-- Validates input before transformation.
+-   Uses transformers to convert between different types of objects.
+-   Unopinionated JSON serialization support.
+-   Provides a chainable API for transforming between different formats.
+-   Validates input before transformation.
 
-## Example
+A few examples:
 
-See `example/example.dart`
+Transform a Map of string to a Shavian style JSON:
 
-```dart
-final fromMap = JsonTransformers.fromMap
-      .chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian));
-
-  final toMap = FromDxJsonTransformer(JsonEscapeConfigs.shavian)
-      .chain(JsonTransformers.toMap);
-
-  const DxResult<Map<String, String>> input = DxSuccess({'foo': 'bar'});
-
-  // Convert a Map<String, String> to Delimatrix style JSON
-  final jsonishStringResult = fromMap.transform(input);
-  print(jsonishStringResult.value);
-  // {𐑖foo𐑖:𐑖bar𐑖}
-
-  // Convert Delimatrix style JSON back to  Map<String, String>
-  final mapResult = toMap.transform(jsonishStringResult);
-  print(mapResult.value);
-  // {foo: bar}
+```
+JsonTransformers.fromMap.chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian)).transform(input);
 ```
 
-## Motivation
+Transform Shavian style JSON to a Map of string:
 
-Traditionally, dealing with such cases involves parsing the JSON result in a single pass, expanding the content field into an object if necessary, and allowing the code to manage any type changes. Delimatrix, however, employs a different approach by assuming two parsing phases.
+```
+FromDxJsonTransformer(JsonEscapeConfigs.shavian).chain(JsonTransformers.toMap).transform(jsonishStringResult);
+```
 
-In the first phase, the initial JSON is converted into an object while leaving the content field as a string. In the second phase, the content field is transformed into the appropriate object representation if needed. This method, although somewhat unconventional, introduces a higher level of flexibility but can pose a security risk if not implemented correctly.
+## Documentation and links
 
-Despite these challenges, the benefits are significant. This approach allows for a variety of models for the content field, which can evolve over time. Moreover, the second parsing phase can handle diverse formats such as JSON, YAML, CSV, Markdown, etc.
+-   [Code Maintenance :wrench:](MAINTENANCE.md)
+-   [Code Of Conduct](CODE_OF_CONDUCT.md)
+-   [Contributing :busts\_in\_silhouette: :construction:](CONTRIBUTING.md)
+-   [Architectural Decision Records :memo:](DECISIONS.md)
+-   [Contributors
+    :busts\_in\_silhouette:](https://github.com/flarebyte/delimatrix_dart/graphs/contributors)
+-   [Dependencies](https://github.com/flarebyte/delimatrix_dart/network/dependencies)
+-   [Glossary
+    :book:](https://github.com/flarebyte/overview/blob/main/GLOSSARY.md)
+-   [Software engineering principles
+    :gem:](https://github.com/flarebyte/overview/blob/main/PRINCIPLES.md)
+-   [Overview of Flarebyte.com ecosystem
+    :factory:](https://github.com/flarebyte/overview)
+-   [Dart dependencies](DEPENDENCIES.md)
+-   [Usage](USAGE.md)
+-   [Example](example/example.dart)
 
-Additionally, the Delimatrix library addresses a common issue encountered when encoding a field in JSON and then encoding the result in JSON again. This process often involves numerous escaping codes, which can be noisy for a human reader. Delimatrix resolves this by converting characters that need to be escaped into characters that do not, simplifying the encoding process.
-
-In summary, Delimatrix not only provides a powerful and flexible solution for transforming strings into objects and vice versa but also enhances the ease of handling complex content representations in various formats.
+## Related

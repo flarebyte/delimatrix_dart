@@ -4,7 +4,7 @@ Fixes: # (issue)
 
 ## Code check
 
--   [x] `flutter analyze` does not show any
+-   [x] `npx baldrick-broth@latest release ready` does not show any
     concerning issues
 
 ## Type of change
