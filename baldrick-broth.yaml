@@ -77,14 +77,24 @@ workflows:
     title: Generate the documentation
     description: Generate the documentation automatically
     tasks:
-      api:
+      dart:
         title: Generate documentation
         description: Generate the api documentation for Dart
         motivation: Good documentation is essential for developer experience
         main:
           commands:
-            - title: Gnerate API documentation
+            - title: Generate API documentation
               run: dart doc
+            - name: deps
+              title: Document the dart dependencies
+              run: npx zx https://raw.githubusercontent.com/flarebyte/baldrick-reserve/main/script/dart-dependencies.mjs
+            - name: fix
+              title: Fix all the markdown files
+              run: npx baldrick-dev-ts@latest markdown fix
+            - name: github
+              title: Fixes markdown in github folder
+              run: npx baldrick-dev-ts@latest markdown fix -s .github/
+          
   github:
     title: Management of the github project
     description: Generate the documentation based on the source code
