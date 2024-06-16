@@ -20,10 +20,14 @@ model:
       - "[Dart dependencies](DEPENDENCIES.md)"
       - "[Usage](USAGE.md)"
       - "[Example](example/example.dart)"
+    related:
+      -  "[JSON and serialization in Flutter](https://docs.flutter.dev/data-and-backend/serialization/json)"
     tags:
       - image-hero
+    cheatsheetFormat: dart
     cheatsheet:
       - title: Transform a Map of string to a Shavian style JSON
+        
         example: JsonTransformers.fromMap.chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian)).transform(input);
       - title: Transform Shavian style JSON to a Map of string
         example: FromDxJsonTransformer(JsonEscapeConfigs.shavian).chain(JsonTransformers.toMap).transform(jsonishStringResult);
@@ -417,5 +421,5 @@ workflows:
           commands:
             - title: Create README.md
               run: npx baldrick-whisker@latest render baldrick-broth.yaml
-                github:flarebyte:baldrick-reserve:template/ts/readme.hbs
+                github:flarebyte:baldrick-reserve:template/dart/readme.hbs
                 README.md

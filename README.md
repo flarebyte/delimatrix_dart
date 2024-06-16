@@ -22,13 +22,13 @@ A few examples:
 
 Transform a Map of string to a Shavian style JSON:
 
-```
+```dart
 JsonTransformers.fromMap.chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian)).transform(input);
 ```
 
 Transform Shavian style JSON to a Map of string:
 
-```
+```dart
 FromDxJsonTransformer(JsonEscapeConfigs.shavian).chain(JsonTransformers.toMap).transform(jsonishStringResult);
 ```
 
@@ -52,3 +52,6 @@ FromDxJsonTransformer(JsonEscapeConfigs.shavian).chain(JsonTransformers.toMap).t
 -   [Example](example/example.dart)
 
 ## Related
+
+-   [JSON and serialization in
+    Flutter](https://docs.flutter.dev/data-and-backend/serialization/json)
