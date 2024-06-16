@@ -37,3 +37,14 @@ be escaped into characters that do not, simplifying the encoding process.
 In summary, Delimatrix not only provides a powerful and flexible solution for
 transforming strings into objects and vice versa but also enhances the ease
 of handling complex content representations in various formats.
+
+## Escaping JSON
+
+A JSON string is a sequence of zero or more Unicode characters, wrapped in
+double quotes, using backslash escapes. A character is represented as a
+single character string. See [JSON specs](https://www.json.org/json-en.html)
+
+![String](https://www.json.org/img/string.png)
+
+In practice, as Dart uses reverse solidus aka backslash () to escape most of
+control characters, we just have to dela with these two.
