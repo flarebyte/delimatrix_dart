@@ -32,7 +32,7 @@ See also:
 
 **Motivation:** Good documentation is essential for developer experience
 
-**Run:** `npx baldrick-broth doc api`
+**Run:** `npx baldrick-broth doc dart`
 
 ***
 
