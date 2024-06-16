@@ -14,7 +14,7 @@ final fromMap = JsonTransformers.fromMap
   // Convert a Map<String, String> to Delimatrix style JSON
   final jsonishStringResult = fromMap.transform(input);
   print(jsonishStringResult.value);
-  // {𐑖foo𐑖:𐑖bar𐑖}
+  // {𐑣foo𐑣:𐑣bar𐑣}
 
   // Convert Delimatrix style JSON back to  Map<String, String>
   final mapResult = toMap.transform(jsonishStringResult);
