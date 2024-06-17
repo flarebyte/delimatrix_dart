@@ -134,10 +134,38 @@ void main() {
         .chain(FromDxJsonTransformer(JsonEscapeConfigs.shavian))
         .chain(JsonTransformers.toMap);
 
-    const DxResult<Map<String, String>> input = DxSuccess({'foo': 'bar'});
+    const DxResult<Map<String, String>> input = DxSuccess({'foo': 'bar\n🙂'});
     final DxResult<Map<String, String>> result = transformer.transform(input);
 
     expect(result, isA<DxSuccess<Map<String, String>>>());
-    expect((result as DxSuccess<Map<String, String>>).value, {'foo': 'bar'});
+    expect(
+        (result as DxSuccess<Map<String, String>>).value, {'foo': 'bar\n🙂'});
+  });
+
+  test('chains shavian and linearB and back', () {
+    final transformer = JsonTransformers.fromMap
+        .chain(ToDxJsonTransformer(JsonEscapeConfigs.shavian))
+        .chain(FromDxJsonTransformer(JsonEscapeConfigs.shavian))
+        .chain(JsonTransformers.toMap);
+
+    final mapToLinearB = JsonTransformers.fromMap
+        .chain(ToDxJsonTransformer(JsonEscapeConfigs.linearB));
+
+    final linearBToMap = FromDxJsonTransformer(JsonEscapeConfigs.linearB)
+        .chain(JsonTransformers.toMap);
+
+    const DxResult<Map<String, String>> basicObject = DxSuccess({'foo': 'bar'});
+    final DxResult<Map<String, String>> input = DxSuccess(
+        {'rootKey': mapToLinearB.transform(basicObject).value ?? '-1-'});
+    final DxResult<Map<String, String>> result = transformer.transform(input);
+
+    expect(result, isA<DxSuccess<Map<String, String>>>());
+    final actual =
+        (result as DxSuccess<Map<String, String>>).value['rootKey'] ?? '-2-';
+    final childResult = linearBToMap.transform(DxSuccess(actual));
+
+    expect(childResult, isA<DxSuccess<Map<String, String>>>());
+    expect(
+        (childResult as DxSuccess<Map<String, String>>).value, {'foo': 'bar'});
   });
 }

@@ -31,7 +31,7 @@ void main() {
   group('ToDxJsonTransformer and FromDxJsonTransformer Tests', () {
     test('Shavian Transformation with JSON payload', () {
       const DxResult<String> input = DxSuccess(
-          '{"key": "value with special chars: \\" \\n \\r \\t \\b \\f / 🙂"}');
+          '{"key": "value with special chars: " \n \r \t \b \f / 🙂"}');
       ToDxJsonTransformer toTransformer =
           ToDxJsonTransformer(JsonEscapeConfigs.shavian);
       FromDxJsonTransformer fromTransformer =
@@ -58,7 +58,7 @@ void main() {
 
     test('Shavian Transformation with String payload', () {
       const DxResult<String> input = DxSuccess(
-          'This is a simple string with special chars: \\" \\n \\r \\t \\b \\f / 🙂');
+          'This is a simple string with special chars: " \n \r \t \b \f / 🙂');
       ToDxJsonTransformer toTransformer =
           ToDxJsonTransformer(JsonEscapeConfigs.shavian);
       FromDxJsonTransformer fromTransformer =
@@ -84,7 +84,7 @@ void main() {
 
     test('Linear B Transformation with JSON payload', () {
       const DxResult<String> input = DxSuccess(
-          '{"key": "value with special chars: \\" \\n \\r \\t \\b \\f / 🙂"}');
+          '{"key": "value with special chars: " \n \r \t \b \f / 🙂"}');
       ToDxJsonTransformer toTransformer =
           ToDxJsonTransformer(JsonEscapeConfigs.linearB);
       FromDxJsonTransformer fromTransformer =
@@ -112,7 +112,7 @@ void main() {
 
     test('Linear B Transformation with String payload', () {
       const DxResult<String> input = DxSuccess(
-          'This is a simple string with special chars: \\" \\n \\r \\t \\b \\f / 🙂');
+          'This is a simple string with special chars: " \n \r \t \b \f / 🙂');
       ToDxJsonTransformer toTransformer =
           ToDxJsonTransformer(JsonEscapeConfigs.linearB);
       FromDxJsonTransformer fromTransformer =
