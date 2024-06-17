@@ -2,6 +2,23 @@ import 'package:delimatrix_dart/delimatrix.dart';
 import 'package:test/test.dart';
 
 void main() {
+  String asciiString = '';
+  for (int codePoint = 0x0020; codePoint <= 0x007E; codePoint++) {
+    asciiString += String.fromCharCode(codePoint);
+  }
+
+  // Shavian range
+  String shavianString = '';
+  for (int codePoint = 0x10450; codePoint <= 0x1047F; codePoint++) {
+    shavianString += String.fromCharCode(codePoint);
+  }
+
+  // Linear B Syllabary range
+  String linearBString = '';
+  for (int codePoint = 0x10000; codePoint <= 0x1007F; codePoint++) {
+    linearBString += String.fromCharCode(codePoint);
+  }
+
   group('JsonEscapeConfigBuilder', () {
     test('should build JsonEscapeConfig with default values', () {
       final config = JsonEscapeConfig.builder().build();
@@ -70,6 +87,18 @@ void main() {
       expect(reverted.value, equals(input.value));
     });
 
+    test('Shavian Transformation with ASCII and LinearB payload', () {
+      final DxResult<String> input = DxSuccess('$asciiString $linearBString');
+      ToDxJsonTransformer toTransformer =
+          ToDxJsonTransformer(JsonEscapeConfigs.shavian);
+      FromDxJsonTransformer fromTransformer =
+          FromDxJsonTransformer(JsonEscapeConfigs.shavian);
+
+      DxResult<String> transformed = toTransformer.transform(input);
+      DxResult<String> reverted = fromTransformer.transform(transformed);
+      expect(reverted.value, equals(input.value));
+    });
+
     test('Shavian Transformation with unwanted payload', () {
       final DxResult<String> input = DxSuccess(
           'text with shavian in it already ${JsonEscapeConfigs.shavian.doubleQuote}');
@@ -113,6 +142,19 @@ void main() {
     test('Linear B Transformation with String payload', () {
       const DxResult<String> input = DxSuccess(
           'This is a simple string with special chars: " \n \r \t \b \f / 🙂');
+      ToDxJsonTransformer toTransformer =
+          ToDxJsonTransformer(JsonEscapeConfigs.linearB);
+      FromDxJsonTransformer fromTransformer =
+          FromDxJsonTransformer(JsonEscapeConfigs.linearB);
+
+      DxResult<String> transformed = toTransformer.transform(input);
+      DxResult<String> reverted = fromTransformer.transform(transformed);
+
+      expect(reverted.value, equals(input.value));
+    });
+
+    test('Linear B Transformation with ASCII and Shavian payload', () {
+      final DxResult<String> input = DxSuccess('$asciiString $shavianString');
       ToDxJsonTransformer toTransformer =
           ToDxJsonTransformer(JsonEscapeConfigs.linearB);
       FromDxJsonTransformer fromTransformer =
