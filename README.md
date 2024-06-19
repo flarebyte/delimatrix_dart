@@ -1,7 +1,11 @@
 # delimatrix\_dart
-[![Dart CI](https://github.com/flarebyte/delimatrix_dart/actions/workflows/main.yml/badge.svg)](https://github.com/flarebyte/delimatrix_dart/actions/workflows/main.yml)
-[![pub package](https://img.shields.io/pub/v/delimatrix_dart.svg)](https://pub.dev/packages/delimatrix_dart)
-[![package publisher](https://img.shields.io/pub/publisher/delimatrix_dart.svg)](https://pub.dev/packages/delimatrix_dart/publisher)
+
+[![Dart
+CI](https://github.com/flarebyte/delimatrix_dart/actions/workflows/main.yml/badge.svg)](https://github.com/flarebyte/delimatrix_dart/actions/workflows/main.yml)
+[![pub
+package](https://img.shields.io/pub/v/delimatrix_dart.svg)](https://pub.dev/packages/delimatrix_dart)
+[![package
+publisher](https://img.shields.io/pub/publisher/delimatrix_dart.svg)](https://pub.dev/packages/delimatrix_dart/publisher)
 
 ![Experimental](https://img.shields.io/badge/status-experimental-blue)
 

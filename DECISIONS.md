@@ -38,6 +38,11 @@ In summary, Delimatrix not only provides a powerful and flexible solution for
 transforming strings into objects and vice versa but also enhances the ease
 of handling complex content representations in various formats.
 
+## Image prompt
+
+> Celtic-style engraving of a Gaulish female character in an ancient
+> library holding ancient manuscripts.
+
 ## Escaping JSON
 
 A JSON string is a sequence of zero or more Unicode characters, wrapped in
