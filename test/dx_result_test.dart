@@ -2,6 +2,41 @@ import 'package:delimatrix_dart/delimatrix.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group('DxResult', () {
+    test('isSuccess returns true for DxSuccess', () {
+      const result = DxSuccess<int>(42);
+      expect(result.isSuccess, true);
+      expect(result.isFailure, false);
+    });
+
+    test('isFailure returns true for DxFailure', () {
+      const result = DxFailure('404', 'Not Found');
+      expect(result.isFailure, true);
+      expect(result.isSuccess, false);
+    });
+
+    test('value returns correct value for DxSuccess', () {
+      const result = DxSuccess<String>('Hello');
+      expect(result.value, 'Hello');
+    });
+
+    test('value returns null for DxFailure', () {
+      const result = DxFailure('500', 'Server Error');
+      expect(result.value, null);
+    });
+
+    test('error returns correct DxFailure for DxFailure', () {
+      const result = DxFailure('403', 'Forbidden');
+      expect(result.error, isNotNull);
+      expect(result.error?.id, '403');
+      expect(result.error?.message, 'Forbidden');
+    });
+
+    test('error returns null for DxSuccess', () {
+      const result = DxSuccess<int>(123);
+      expect(result.error, null);
+    });
+  });
   group('DxResult.map', () {
     test('maps a DxSuccess result correctly', () {
       const DxResult<int> successResult = DxSuccess(42);
